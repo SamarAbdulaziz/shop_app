@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shop_app/core/colors.dart';
 
-ThemeData lightTheme=ThemeData(
+ThemeData lightTheme = ThemeData(
   fontFamily: 'Agbalumo',
   primarySwatch: defaultColor,
   scaffoldBackgroundColor: Colors.white,
@@ -23,11 +23,8 @@ ThemeData lightTheme=ThemeData(
       color: Colors.black,
     ),
   ),
-
-
-
 );
-ThemeData darkTheme=ThemeData(
+ThemeData darkTheme = ThemeData(
   fontFamily: 'Agbalumo',
 );
 // ThemeData lightTheme = ThemeData(

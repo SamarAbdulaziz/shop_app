@@ -39,7 +39,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             function: () {
               navigateAndFinish(
                 context,
-                const LoginScreen(),
+                LoginScreen(),
               );
             },
             text: 'skip',
@@ -91,7 +91,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 FloatingActionButton(
                   onPressed: () {
                     if (isLast) {
-                      navigateAndFinish(context, const LoginScreen());
+                      navigateAndFinish(context, LoginScreen());
                     } else {
                       boardController.nextPage(
                           duration: const Duration(

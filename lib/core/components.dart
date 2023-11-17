@@ -69,27 +69,37 @@ Widget defaultFormField({
         ),
         suffixIcon: suffix != null
             ? IconButton(
-          onPressed: suffixPressed,
-          icon: Icon(
-            suffix,
-          ),
-        )
+                onPressed: suffixPressed,
+                icon: Icon(
+                  suffix,
+                ),
+              )
             : null,
         border: const OutlineInputBorder(),
       ),
     );
 
-
 void navigateAndFinish(
-    context,
-    widget,
-    ) =>
+  context,
+  widget,
+) =>
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
         builder: (context) => widget,
       ),
-          (route) {
+      (route) {
         return false;
       },
+    );
+
+void navigateTo(
+  context,
+  widget,
+) =>
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => widget,
+      ),
     );
