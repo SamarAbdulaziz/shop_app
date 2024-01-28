@@ -37,10 +37,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         actions: [
           defaultTextButton(
             function: () {
-              navigateAndFinish(
-                context,
-                LoginScreen(),
-              );
+              submit(context);
             },
             text: 'skip',
           ),
@@ -58,12 +55,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     // setState(() {
                     //   isLast = true;
                     // });
-                    print('last');
+                    debugPrint('last');
                   } else {
                     // setState(() {
                     //   isLast = false;
                     // });
-                    print('not last ');
+                    debugPrint('not last ');
                   }
                 },
                 physics: const BouncingScrollPhysics(),
@@ -91,7 +88,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 FloatingActionButton(
                   onPressed: () {
                     if (isLast) {
-                      navigateAndFinish(context, LoginScreen());
+                      submit(context);
                     } else {
                       boardController.nextPage(
                           duration: const Duration(
@@ -109,6 +106,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
     );
   }
+}
+
+void submit(context) {
+  navigateAndFinish(
+    context,
+    LoginScreen(),
+  );
 }
 
 class OnBoardingItem extends StatelessWidget {

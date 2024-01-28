@@ -30,7 +30,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  smooth_page_indicator: 
+  smooth_page_indicator:
+  flutter_bloc:
+  bloc:
+  dio:
 
 
   # The following adds the Cupertino Icons font to your application.
