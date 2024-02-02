@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app/data/local_data_source/cache_helper.dart';
+
+import '../presentation/view/screens/login-screen.dart';
 
 Widget defaultButton({
   double width = double.infinity,
@@ -103,3 +107,42 @@ void navigateTo(
         builder: (context) => widget,
       ),
     );
+
+void showToast({
+  required String msg,
+  required ToastStates state,
+}) {
+  Fluttertoast.showToast(
+    msg: msg,
+    backgroundColor: Colors.red,
+    gravity: ToastGravity.BOTTOM,
+    textColor: chooseToastColor(state),
+    timeInSecForIosWeb: 5,
+    toastLength: Toast.LENGTH_LONG,
+    fontSize: 16.0,
+  );
+}
+
+enum ToastStates { success, error, warning }
+
+Color chooseToastColor(ToastStates state) {
+  Color color;
+  switch (state) {
+    case ToastStates.success:
+      color = Colors.green;
+      break;
+    case ToastStates.error:
+      color = Colors.red;
+      break;
+    case ToastStates.warning:
+      color = Colors.amber;
+      break;
+  }
+  return color;
+}
+
+void singOut(BuildContext context) {
+  CacheHelper.removeData(key: 'token').then((value) {
+    navigateAndFinish(context, LoginScreen());
+  });
+}

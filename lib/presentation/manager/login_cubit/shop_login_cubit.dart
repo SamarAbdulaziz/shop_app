@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/data/models/auth/login_model.dart';
+import 'package:shop_app/data/remote_data_source/dio_helper.dart';
 import 'package:shop_app/presentation/manager/login_cubit/shop_login_state.dart';
-import '../../../data/dio_helper/dio_helper.dart';
 import '../../../data/endpoints.dart';
 
 class ShopLoginCubit extends Cubit<ShopLoginStates> {
   ShopLoginCubit() : super(ShopLoginInitialState());
 
   static ShopLoginCubit get(context) => BlocProvider.of(context);
+  late ShopLoginModel loginModel;
 
   void userLogin({
     required String email,
@@ -23,7 +25,11 @@ class ShopLoginCubit extends Cubit<ShopLoginStates> {
       },
     ).then((value) {
       debugPrint(value.data["message"]);
-      emit(ShopLoginSuccessState());
+      loginModel = ShopLoginModel.fromJson(value.data);
+      emit(ShopLoginSuccessState(loginModel: loginModel));
+      // debugPrint(loginModel.status.toString());
+      // debugPrint(loginModel.message);
+      // debugPrint(loginModel.data!.token ?? 'no token');//
     }).catchError((error) {
       debugPrint(error.toString());
       emit(ShopLoginErrorState(error.toString()));

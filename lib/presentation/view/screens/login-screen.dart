@@ -3,7 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/components.dart';
 import 'package:shop_app/presentation/manager/login_cubit/shop_login_cubit.dart';
 import 'package:shop_app/presentation/manager/login_cubit/shop_login_state.dart';
-import 'package:shop_app/presentation/screens/register_screen.dart';
+import 'package:shop_app/presentation/view/screens/register_screen.dart';
+
+import '../../../data/local_data_source/cache_helper.dart';
+import 'home_screen.dart';
+
 
 class LoginScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
@@ -18,7 +22,26 @@ class LoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => ShopLoginCubit(),
       child: BlocConsumer<ShopLoginCubit, ShopLoginStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is ShopLoginSuccessState) {
+            if (state.loginModel.status == true) {
+              debugPrint(state.loginModel.status.toString());
+              debugPrint(state.loginModel.message);
+              debugPrint(state.loginModel.data!.token);
+              CacheHelper.saveData(
+                key: 'token',
+                value: state.loginModel.data!.token,
+              ).then((value) {
+                navigateAndFinish(context, const HomeScreen());
+              });
+            } else {
+              debugPrint(state.loginModel.message.toString());
+              showToast(
+                  msg: state.loginModel.message.toString(),
+                  state: ToastStates.error);
+            }
+          }
+        },
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(),
@@ -95,18 +118,20 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(
                           height: 30.0,
                         ),
-                        defaultButton(
-                          function: () {
-                            if (formKey.currentState!.validate()) {
-                              ShopLoginCubit.get(context).userLogin(
-                                email: emailController.text,
-                                password: passwordController.text,
-                              );
-                            }
-                          },
-                          text: 'login',
-                          isUpperCase: true,
-                        ),
+                        state is ShopLoginLoadingState
+                            ? const LinearProgressIndicator()
+                            : defaultButton(
+                                function: () {
+                                  if (formKey.currentState!.validate()) {
+                                    ShopLoginCubit.get(context).userLogin(
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                    );
+                                  }
+                                },
+                                text: 'login',
+                                isUpperCase: true,
+                              ),
                         const SizedBox(
                           height: 15.0,
                         ),
