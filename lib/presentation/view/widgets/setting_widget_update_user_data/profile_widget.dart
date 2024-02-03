@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/components.dart';
 import 'package:shop_app/core/constatnt.dart';
-import 'package:shop_app/presentation/manager/shop_cubit/cubit/cubit.dart';
+import 'package:shop_app/presentation/manager/shop_cubit/cubit/shop_cubit.dart';
 import 'package:shop_app/presentation/manager/shop_cubit/cubit/states.dart';
 import 'package:shop_app/presentation/view/widgets/custom_widget/custom_auth_button.dart';
 import 'package:shop_app/presentation/view/widgets/custom_widget/custom_textformfield_widget.dart';

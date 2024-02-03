@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/components.dart';
-import 'package:shop_app/presentation/manager/shop_cubit/cubit/cubit.dart';
+import 'package:shop_app/presentation/manager/shop_cubit/cubit/shop_cubit.dart';
 import 'package:shop_app/presentation/manager/shop_cubit/cubit/states.dart';
+import 'package:shop_app/presentation/view/screens/search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,13 +20,14 @@ class HomeScreen extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Home Screen'),
             actions: [
-              TextButton(
+              IconButton(
                 onPressed: () {
-                  singOut(context);
+                  navigateTo(
+                    context,
+                    const SearchScreen(),
+                  );
                 },
-                child: const Text(
-                  'sign out',
-                ),
+                icon: const Icon(Icons.search),
               ),
             ],
           ),

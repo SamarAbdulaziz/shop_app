@@ -4,7 +4,7 @@ import 'package:shop_app/core/components.dart';
 
 import '../../../../core/colors.dart';
 import '../../../../data/models/home_model/home_model.dart';
-import '../../../manager/shop_cubit/cubit/cubit.dart';
+import '../../../manager/shop_cubit/cubit/shop_cubit.dart';
 import '../../../manager/shop_cubit/cubit/states.dart';
 
 class GridViewWidget extends StatelessWidget {

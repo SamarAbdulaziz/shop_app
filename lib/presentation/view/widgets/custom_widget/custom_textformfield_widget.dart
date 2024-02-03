@@ -8,7 +8,7 @@ Widget defaultTextForm({
   hintText,
   dynamic type,
   msg,
-  dynamic visableIcon,
+  dynamic visibleIcon,
   bool passwd = false,
   ValueChanged<String>? onSubmitted,
   GestureTapCallback? onTap
@@ -25,13 +25,13 @@ Widget defaultTextForm({
       },
       decoration: InputDecoration(
         suffixIcon: InkWell(
-          child: Icon(visableIcon),
           onTap: onTap,
+          child: Icon(visibleIcon),
         ),
-        contentPadding: EdgeInsets.all(24),
-        border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(25.0),
-          borderSide: new BorderSide(),
+        contentPadding: const EdgeInsets.all(24),
+        border:  OutlineInputBorder(
+          borderRadius: BorderRadius.circular(25.0),
+          borderSide: const BorderSide(),
         ),
         label: Text("${labelText}"),
         prefix: Icon(icon),

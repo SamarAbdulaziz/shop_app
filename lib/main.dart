@@ -9,7 +9,7 @@ import 'package:shop_app/presentation/view/screens/login-screen.dart';
 import 'package:shop_app/presentation/view/screens/onBoarding_screen.dart';
 
 import 'presentation/manager/login_cubit/my_bloc_observer.dart';
-import 'presentation/manager/shop_cubit/cubit/cubit.dart';
+import 'presentation/manager/shop_cubit/cubit/shop_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,6 +54,7 @@ class MyApp extends StatelessWidget {
         ..getHomeFavorite()
         ..getUserData(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.light,
         theme: lightTheme,
         home: startWidget, //OnBoardingScreen(),

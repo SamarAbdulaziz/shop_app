@@ -1,7 +1,7 @@
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:iiii/controller/Auth/cubit/cubit.dart';
+// import 'package:iiii/controller/Auth/cubit/register_cubit.dart';
 // import 'package:iiii/controller/Auth/cubit/states.dart';
 // import 'package:iiii/view/screen/register_screen.dart';
 // import 'package:iiii/view/widget/custom_auth_button.dart';

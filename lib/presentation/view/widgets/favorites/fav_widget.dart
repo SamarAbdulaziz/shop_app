@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/colors.dart';
 import '../../../../data/models/favorites/get_favorites_model.dart';
-import '../../../manager/shop_cubit/cubit/cubit.dart';
+import '../../../manager/shop_cubit/cubit/shop_cubit.dart';
 import '../../../manager/shop_cubit/cubit/states.dart';
 
 

@@ -67,6 +67,7 @@ Widget defaultFormField({
       onTap: onTap,
       validator: validate,
       decoration: InputDecoration(
+        contentPadding: const EdgeInsets.all(24),
         labelText: label,
         prefixIcon: Icon(
           prefix,
@@ -79,7 +80,12 @@ Widget defaultFormField({
                 ),
               )
             : null,
-        border: const OutlineInputBorder(),
+        border:  OutlineInputBorder(
+          borderRadius: BorderRadius.circular(25.0),
+          borderSide: const BorderSide(),
+
+        ),
+
       ),
     );
 

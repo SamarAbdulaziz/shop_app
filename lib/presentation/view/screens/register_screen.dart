@@ -4,9 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/components.dart';
 import 'package:shop_app/core/constatnt.dart';
 import 'package:shop_app/data/local_data_source/cache_helper.dart';
-import 'package:shop_app/presentation/manager/register_cubit/cubit.dart';
+import 'package:shop_app/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:shop_app/presentation/manager/register_cubit/states.dart';
 import 'package:shop_app/presentation/view/screens/home_screen.dart';
+import 'package:shop_app/presentation/view/screens/login-screen.dart';
 import 'package:shop_app/presentation/view/widgets/custom_widget/custom_auth_button.dart';
 import 'package:shop_app/presentation/view/widgets/custom_widget/custom_textformfield_widget.dart';
 
@@ -147,7 +148,7 @@ class RegisterScreen extends StatelessWidget {
                       onTap: () {
                         cubit.changPasswordVisibility();
                       },
-                      visableIcon: cubit.suffix,
+                      visibleIcon: cubit.suffix,
                     ),
 
                     const SizedBox(
@@ -178,6 +179,23 @@ class RegisterScreen extends StatelessWidget {
                     ),
                     const SizedBox(
                       height: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'already have an account?',
+                        ),
+                        defaultTextButton(
+                          function: () {
+                            navigateAndFinish(
+                              context,
+                              LoginScreen(),
+                            );
+                          },
+                          text: 'Sign in',
+                        ),
+                      ],
                     ),
                   ],
                 ),
