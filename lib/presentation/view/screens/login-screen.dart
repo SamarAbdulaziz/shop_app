@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/components.dart';
+import 'package:shop_app/core/constatnt.dart';
 import 'package:shop_app/presentation/manager/login_cubit/shop_login_cubit.dart';
 import 'package:shop_app/presentation/manager/login_cubit/shop_login_state.dart';
 import 'package:shop_app/presentation/view/screens/register_screen.dart';
 
 import '../../../data/local_data_source/cache_helper.dart';
 import 'home_screen.dart';
-
 
 class LoginScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
@@ -32,6 +32,7 @@ class LoginScreen extends StatelessWidget {
                 key: 'token',
                 value: state.loginModel.data!.token,
               ).then((value) {
+                token = state.loginModel.data!.token;
                 navigateAndFinish(context, const HomeScreen());
               });
             } else {
@@ -145,7 +146,7 @@ class LoginScreen extends StatelessWidget {
                               function: () {
                                 navigateTo(
                                   context,
-                                  const RegisterScreen(),
+                                   RegisterScreen(),
                                 );
                               },
                               text: 'register',

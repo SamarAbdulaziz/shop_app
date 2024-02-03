@@ -32,7 +32,7 @@ abstract class DioHelper {
       queryParameters: query,
       data: data,
     )
-        .catchError((e){
+        .catchError((e) {
       if (e is DioException) {
         print('error');
         print(e.response?.data.toString());
@@ -68,23 +68,28 @@ abstract class DioHelper {
       }
     });
   }
-// static Future<Response>putDataAPI({
-//   required String url,
-//   Map<String,dynamic>?query,
-//   required  Map<String,dynamic>data,
-//   String lang ='en',
-//   String? token,
-// })async {
-//   dio!.options.headers = {
-//     'Lang': lang,
-//     'Content-Type':'application/json',
-//     'Authorization': token,
-//   };
-//
-//   return await dio!.put(
-//       url,
-//       data: data,
-//       queryParameters: query
-//   );
-// }
+
+  static Future<Response> putData({
+    required String url,
+    Map<String, dynamic>? query,
+    required Map<String, dynamic> data,
+    String lang = 'en',
+    String? token,
+  }) async {
+    dio!.options.headers = {
+      'Lang': lang,
+      'Content-Type': 'application/json',
+      'Authorization': token,
+    };
+
+    return await dio!
+        .put(url, data: data, queryParameters: query)
+        .catchError((e) {
+      if (e is DioException) {
+        print('error');
+        print(e.response?.data.toString());
+        return e.response;
+      }
+    });
+  }
 }

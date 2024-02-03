@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/constatnt.dart';
@@ -108,38 +109,48 @@ class ShopCubit extends Cubit<ShopStates> {
       print(favoritesModel!.data!.data2);
 
       emit(ShopSuccessFavDataStates());
+    }).catchError((e) {
+      if (e is DioException) {
+        print('*********************error******************');
+        print(e.message.toString());
+      }
+      return e;
     });
   }
 
-  ShopLoginModel? UserModel;
+  ShopLoginModel? userModel;
 
-  void GetUserData() {
-    emit(ShopUserDataStates());
+  void getUserData() {
+    emit(ShopLoadingUserDataStates());
 
     DioHelper.getData(
       url: PROFILE,
       token: token,
     ).then((value) {
-      UserModel = ShopLoginModel.fromJson(value.data);
-      print(UserModel!.data!.name);
+      userModel = ShopLoginModel.fromJson(value.data);
+      print(userModel!.data!.name);
 
-      emit(ShopSuccessUserDataStates(UserModel!));
+      emit(ShopSuccessUserDataStates(userModel!));
     });
   }
 
-// void UpdateUserData(
-//     {required String name, required String phone, required String email}) {
-//   emit(ShopUpdateUserDataLoadingStates());
-//
-//   DioHelper.putDataAPI(
-//           data: {'name': name, 'phone': phone, 'email': email},
-//           url: UPDATEPROFILE,
-//           token: token)
-//       .then((value) {
-//     UserModel = ShopLoginModel.fromJson(value.data);
-//     print(UserModel!.data!.name);
-//
-//     emit(ShopSuccessUpdateUserDataStates(UserModel!));
-//   });
-// }
+  void updateUserData({
+    required String name,
+    required String phone,
+    required String email,
+  }) {
+    emit(ShopUpdateUserDataLoadingStates());
+
+    DioHelper.putData(data: {
+      'name': name,
+      'phone': phone,
+      'email': email,
+    }, url: UPDATEPROFILE, token: token)
+        .then((value) {
+      userModel = ShopLoginModel.fromJson(value.data);
+      print(userModel!.data!.name);
+
+      emit(ShopSuccessUpdateUserDataStates(userModel!));
+    });
+  }
 }

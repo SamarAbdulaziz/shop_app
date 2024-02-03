@@ -51,7 +51,7 @@ class ShopErrorChangeFavDataStates extends ShopStates {
   ShopErrorChangeFavDataStates(this.error);
 }
 
-class ShopUserDataStates extends ShopStates {}
+class ShopLoadingUserDataStates extends ShopStates {}
 
 class ShopSuccessUserDataStates extends ShopStates {
   final ShopLoginModel model;
