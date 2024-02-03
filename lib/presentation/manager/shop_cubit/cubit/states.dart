@@ -1,5 +1,5 @@
 import 'package:shop_app/data/models/auth/login_model.dart';
-import 'package:shop_app/data/models/favorites/add_fav_model.dart';
+import 'package:shop_app/data/models/favorites/change_favorites_model.dart';
 
 abstract class ShopStates {}
 
@@ -40,7 +40,7 @@ class ShopErrorFavDataStates extends ShopStates {
 class ShopLoadingChangeFavDataStates extends ShopStates {}
 
 class ShopSuccessChangeFavDataStates extends ShopStates {
-  final FavModel model;
+  final ChangeFavoritesModel model;
 
   ShopSuccessChangeFavDataStates(this.model);
 }

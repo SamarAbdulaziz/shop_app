@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/core/components.dart';
 
 import '../../../../core/colors.dart';
 import '../../../../data/models/home_model/home_model.dart';
@@ -16,10 +17,20 @@ class GridViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(
-      listener: (BuildContext context, state) {},
+      listener: (BuildContext context, state) {
+        if (state is ShopSuccessChangeFavDataStates) {
+          if (!state.model.status) {
+            print(state.model.message);
+            showToast(msg: state.model.message, state: ToastStates.error);
+          } else {
+            print(state.model.message);
+            showToast(msg: state.model.message, state: ToastStates.success);
+          }
+        }
+      },
       builder: (BuildContext context, ShopStates state) {
         int? id = homeModel.data.product[index].id;
-        ShopCubit getData = ShopCubit.get(context);
+        ShopCubit cubit = ShopCubit.get(context);
         return Container(
           color: Colors.white,
           child: Column(
@@ -93,15 +104,17 @@ class GridViewWidget extends StatelessWidget {
                             ),
                           ),
                         const Spacer(),
+                        // homeModel.data.product[index].in_fav ==works as== cubit.fav[homeModel.data.product[index].id]
                         CircleAvatar(
                           backgroundColor:
-                              getData.fav[homeModel.data.product[index].id] ==
+                              //homeModel.data.product[index].in_fav
+                              cubit.fav[homeModel.data.product[index].id] ==
                                       true
                                   ? Colors.red
                                   : defaultColor,
                           child: IconButton(
                             onPressed: () {
-                              getData.ChangeFavIcon(id!);
+                              cubit.changeFavIcon(id!);
                             },
                             icon: const Icon(
                               Icons.favorite_border,
@@ -126,7 +139,7 @@ Widget gridViewWidgt(HomeModel? model, index) {
     listener: (BuildContext context, state) {},
     builder: (BuildContext context, ShopStates state) {
       int? id = model!.data.product[index].id;
-      ShopCubit getData = ShopCubit.get(context);
+      ShopCubit cubit = ShopCubit.get(context);
       return Container(
         color: Colors.white,
         child: Column(
@@ -202,12 +215,12 @@ Widget gridViewWidgt(HomeModel? model, index) {
                       const Spacer(),
                       CircleAvatar(
                         backgroundColor:
-                            getData.fav[model.data.product[index].id] == true
+                            cubit.fav[model.data.product[index].id] == true
                                 ? Colors.red
                                 : defaultColor,
                         child: IconButton(
                           onPressed: () {
-                            getData.ChangeFavIcon(id!);
+                            cubit.changeFavIcon(id!);
                           },
                           icon: const Icon(
                             Icons.favorite_border,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/colors.dart';
-import '../../../../data/models/favorites/fav_model.dart';
+import '../../../../data/models/favorites/get_favorites_model.dart';
 import '../../../manager/shop_cubit/cubit/cubit.dart';
 import '../../../manager/shop_cubit/cubit/states.dart';
 
@@ -81,7 +81,7 @@ Widget BuildFavItem(FavoritesModel? model,index,context) => BlocConsumer<ShopCub
                         backgroundColor: getData.fav[model.data!.data2[index].product!.id] == true? Colors.red : defaultColor,
                         child: IconButton(
                             onPressed: (){
-                              getData.ChangeFavIcon(id);
+                              getData.changeFavIcon(id);
                             }, icon:const Icon(
                           Icons.favorite_border,
                           size:15,

@@ -3,10 +3,10 @@ class FavoritesModel {
   String? message;
   Data? data;
 
-  FavoritesModel.Fromjson(Map<String, dynamic> json) {
+  FavoritesModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = Data.Fromjson(json['data']);
+    data = Data.fromJson(json['data']);
   }
 }
 
@@ -24,11 +24,11 @@ class Data {
   late int to;
   late int total;
 
-  Data.Fromjson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
 
     json['data'].forEach((element) {
-      data2.add(Data2.Fromjson(element));
+      data2.add(Data2.fromJson(element));
     });
 
     firstPageUrl = json['first_page_url'];
@@ -48,9 +48,9 @@ class Data2 {
   int? id;
   Product? product;
 
-  Data2.Fromjson(Map<String, dynamic> json) {
+  Data2.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    product = Product.Fromjson(json['product']);
+    product = Product.fromJson(json['product']);
   }
 }
 
@@ -63,7 +63,7 @@ class Product {
   late String name;
   late String description;
 
-  Product.Fromjson(Map<String, dynamic> json) {
+  Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     price = json['price'];
     oldPrice = json['old_price'];

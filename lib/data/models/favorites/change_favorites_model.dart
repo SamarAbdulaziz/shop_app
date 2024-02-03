@@ -1,7 +1,7 @@
-class FavModel{
+class ChangeFavoritesModel{
   late bool status;
   late String message;
-  FavModel.fromJson(Map<String,dynamic>json){
+  ChangeFavoritesModel.fromJson(Map<String,dynamic>json){
     status=json['status'];
     message=json['message'];
   }
