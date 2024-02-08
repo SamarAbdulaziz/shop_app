@@ -6,7 +6,7 @@ import 'package:shop_app/core/constatnt.dart';
 import 'package:shop_app/presentation/manager/shop_cubit/cubit/shop_cubit.dart';
 import 'package:shop_app/presentation/manager/shop_cubit/cubit/states.dart';
 import 'package:shop_app/presentation/view/widgets/custom_widget/custom_auth_button.dart';
-import 'package:shop_app/presentation/view/widgets/custom_widget/custom_textformfield_widget.dart';
+import 'package:shop_app/presentation/view/widgets/custom_widget/custom_text_form_field_widget.dart';
 
 class ProfileWidget extends StatelessWidget {
   ProfileWidget({super.key});
@@ -21,11 +21,22 @@ class ProfileWidget extends StatelessWidget {
     return BlocConsumer<ShopCubit, ShopStates>(
       listener: (context, state) {
         // TODO: implement listener
+        if (state is ShopSuccessUpdateUserDataStates) {
+          showToast(
+            msg: state.model.message!,
+            state: ToastStates.success,
+          );
+          //navigateAndFinish(context, const HomeScreen());//leads to the same screen
+        }
+        if (state is ShopErrorUpdateUserDataStates) {
+          showToast(
+            msg: state.error.toString(),
+            state: ToastStates.error,
+          );
+        }
       },
       builder: (context, state) {
-        var model = ShopCubit
-            .get(context)
-            .userModel;
+        var model = ShopCubit.get(context).userModel;
         token = model!.data!.token;
         nameController.text = model.data!.name!;
         emailController.text = model.data!.email!;
@@ -34,7 +45,7 @@ class ProfileWidget extends StatelessWidget {
         return ConditionalBuilder(
           condition: cubit.userModel != null,
           fallback: (BuildContext context) =>
-          const Center(child: Text("Please Refresh the application")),
+              const Center(child: Text("Please Refresh the application")),
           builder: (BuildContext context) {
             return Padding(
               padding: const EdgeInsets.all(20.0),
@@ -42,7 +53,8 @@ class ProfileWidget extends StatelessWidget {
                 key: formKey,
                 child: Column(
                   children: [
-                    if(state is ShopUpdateUserDataLoadingStates) const LinearProgressIndicator(),
+                    if (state is ShopUpdateUserDataLoadingStates)
+                      const LinearProgressIndicator(),
                     const SizedBox(
                       height: 20,
                     ),
@@ -103,9 +115,8 @@ class ProfileWidget extends StatelessWidget {
                       authButtonText: "Sign out",
                       onpressed: () {
                         singOut(context);
-                         },
+                      },
                     ),
-
                   ],
                 ),
               ),
@@ -116,98 +127,3 @@ class ProfileWidget extends StatelessWidget {
     );
   }
 }
-
-//
-// Widget UserData(context) {
-//   return BlocConsumer<ShopCubit, ShopStates>(
-//     listener: (BuildContext context, state) {},
-//     builder: (BuildContext context, state) {
-//
-//
-//       return ConditionalBuilder(
-//         condition: getData.UserModel != null,
-//         fallback: (BuildContext context) =>
-//         const Center(child: Text("Please Refresh the applecation")),
-//         builder: (BuildContext context) {
-//           return Padding(
-//             padding: const EdgeInsets.all(20.0),
-//             child: Form(
-//               key: formKey,
-//               child: Column(
-//                 children: [
-//                   if(state is ShopUpdateUserDataLoadingStates) const LinearProgressIndicator(),
-//                   const SizedBox(
-//                     height: 20,
-//                   ),
-//                   //name
-//                   defaultTextForm(
-//                       msg: 'please enter your Name',
-//                       type: TextInputType.name,
-//                       labelText: "Name",
-//                       hintText: "Test",
-//                       controller: namecontroller,
-//                       icon: Icons.person),
-//                   const SizedBox(
-//                     height: 15,
-//                   ),
-//                   //login
-//                   defaultTextForm(
-//                       msg: 'please enter your e-mail',
-//                       type: TextInputType.emailAddress,
-//                       labelText: "Email",
-//                       hintText: "text@email.com",
-//                       controller: emailcontroller,
-//                       icon: Icons.email_outlined),
-//
-//                   const SizedBox(
-//                     height: 15,
-//                   ),
-//                   //phone
-//                   defaultTextForm(
-//                       msg: 'please enter your phone',
-//                       type: TextInputType.phone,
-//                       labelText: "phone",
-//                       hintText: "01xxxxxxxxx",
-//                       controller: phonecontroller,
-//                       icon: Icons.phone),
-//                   const SizedBox(
-//                     height: 20,
-//                   ),
-//                   authButton(
-//                     context: context,
-//                     authButtonText: "Update Data",
-//                     onpressed: () {
-//                       if (formKey.currentState!.validate()) {
-//                         getData.UpdateUserData(
-//                           name: namecontroller.text,
-//                           phone: phonecontroller.text,
-//                           email: emailcontroller.text,
-//                         );
-//                         print(emailcontroller.text);
-//                       }
-//                     },
-//                   ),
-//                   const SizedBox(
-//                     height: 20,
-//                   ),
-//
-//                   authButton(
-//                     context: context,
-//                     authButtonText: "Sign out",
-//                     onpressed: () {
-//                       CachHelper.clearData(key: 'token').then(
-//                               (value) =>
-//                               navigatReplace(context, LoginScreen()));
-//                     },
-//                   ),
-//
-//
-//                 ],
-//               ),
-//             ),
-//           );
-//         },
-//       );
-//     },
-//   );
-// }

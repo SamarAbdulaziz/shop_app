@@ -21,7 +21,7 @@ class FavScreen extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) =>
                       BuildFavItem(cubit.favoritesModel, index, context),
-                  separatorBuilder: (context, index) => Container(
+                  separatorBuilder: (context, index) => const SizedBox(
                         height: 1,
                         width: double.infinity,
                       ),
@@ -32,7 +32,7 @@ class FavScreen extends StatelessWidget {
                       .length),
               fallback: (context) => const Center(
                     child: Text(
-                      "\“NO Favorites item yet, please browse the products First\”",
+                      "“NO Favorites item yet, please browse the products First”",
                       style: TextStyle(color: Colors.grey),
                     ),
                   ));

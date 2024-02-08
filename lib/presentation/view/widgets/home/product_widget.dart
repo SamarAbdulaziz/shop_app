@@ -5,8 +5,8 @@ import 'package:shop_app/presentation/view/widgets/home/gride_view_widget.dart';
 import 'package:shop_app/presentation/view/widgets/home/item_builder_widget.dart';
 import '../../../../data/models/home_model/home_model.dart';
 
-class productsBuilderWidget extends StatelessWidget {
-  const productsBuilderWidget(
+class ProductsBuilderWidget extends StatelessWidget {
+  const ProductsBuilderWidget(
       {super.key, required this.homeModel, required this.catModel});
 
   final HomeModel homeModel;
@@ -48,7 +48,7 @@ class productsBuilderWidget extends StatelessWidget {
                 "Categories",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
               ),
-              Container(
+              SizedBox(
                 height: 100,
                 child: ListView.separated(
                     physics: const BouncingScrollPhysics(),

@@ -1,33 +1,44 @@
-// import 'package:flutter/material.dart';
-// import '../../../model/boarding/boarding_model.dart';
-//
-// Widget onBoarding (BoardingModel model) {
-//
-//   return Center(
-//     child: Column(
-//     crossAxisAlignment: CrossAxisAlignment.start,
-//     children: [
-//       // image
-//       Expanded(child: Image(image:AssetImage('${model.image}') )),
-//       //title of boarding
-//       Text(
-//         "${model.title}",
-//         style: const TextStyle(
-//             fontSize: 24,
-//             fontWeight: FontWeight.bold
-//         ),
-//       ),
-//       const SizedBox(height: 15),
-//       //body of boarding
-//       Text(
-//         "${model.body}",
-//         style: const TextStyle(
-//             fontSize: 14,
-//             fontWeight: FontWeight.bold,
-//             color: Colors.grey
-//         ),
-//       ),
-//     ],
-// ),
-//   );
-// }
+import 'package:flutter/material.dart';
+import 'package:shop_app/presentation/view/screens/onBoarding_screen.dart';
+
+class OnBoardingItem extends StatelessWidget {
+  const OnBoardingItem({
+    super.key,
+    required this.boarding,
+  });
+
+  final OnBoardingModel boarding;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Image(
+            image: AssetImage(
+              boarding.image,
+            ),
+            fit: BoxFit.contain,
+          ),
+        ),
+        const SizedBox(
+          height: 30.0,
+        ),
+        Text(
+          boarding.screenTitle,
+          style: const TextStyle(fontSize: 24.0),
+        ),
+        const SizedBox(
+          height: 15.0,
+        ),
+        Text(
+          boarding.screenBody,
+        ),
+        const SizedBox(
+          height: 15.0,
+        ),
+      ],
+    );
+  }
+}

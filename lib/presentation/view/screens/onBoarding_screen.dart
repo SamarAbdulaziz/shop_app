@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/core/colors.dart';
 import 'package:shop_app/data/local_data_source/cache_helper.dart';
 import 'package:shop_app/presentation/view/screens/login-screen.dart';
+import 'package:shop_app/presentation/view/widgets/onBoarding/on_boarding_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../core/components.dart';
+
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
 
@@ -116,47 +118,6 @@ void submit(context) {
   });
 }
 
-class OnBoardingItem extends StatelessWidget {
-  const OnBoardingItem({
-    super.key,
-    required this.boarding,
-  });
-
-  final OnBoardingModel boarding;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Image(
-            image: AssetImage(
-              boarding.image,
-            ),
-            fit: BoxFit.contain,
-          ),
-        ),
-        const SizedBox(
-          height: 30.0,
-        ),
-        Text(
-          boarding.screenTitle,
-          style: const TextStyle(fontSize: 24.0),
-        ),
-        const SizedBox(
-          height: 15.0,
-        ),
-        Text(
-          boarding.screenBody,
-        ),
-        const SizedBox(
-          height: 15.0,
-        ),
-      ],
-    );
-  }
-}
 
 class OnBoardingModel {
   final String image;

@@ -1,5 +1,4 @@
 
-import 'package:shop_app/data/models/auth/login_model.dart';
 
 import '../../../data/models/auth/register_model.dart';
 

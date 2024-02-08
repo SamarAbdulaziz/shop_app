@@ -20,7 +20,7 @@ class ProductScreen extends StatelessWidget {
           condition: cubit.homeModel != null && cubit.catModel != null,
           builder: (context) =>
               //productsBuilderWidget(cubit.homeModel, cubit.catModel),
-              productsBuilderWidget(
+              ProductsBuilderWidget(
                   homeModel: cubit.homeModel!, catModel: cubit.catModel!),
           fallback: (context) => const Center(
             child: CircularProgressIndicator(),

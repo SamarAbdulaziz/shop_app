@@ -9,7 +9,7 @@ import 'package:shop_app/presentation/manager/register_cubit/states.dart';
 import 'package:shop_app/presentation/view/screens/home_screen.dart';
 import 'package:shop_app/presentation/view/screens/login-screen.dart';
 import 'package:shop_app/presentation/view/widgets/custom_widget/custom_auth_button.dart';
-import 'package:shop_app/presentation/view/widgets/custom_widget/custom_textformfield_widget.dart';
+import 'package:shop_app/presentation/view/widgets/custom_widget/custom_text_form_field_widget.dart';
 
 class RegisterScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
@@ -32,11 +32,9 @@ class RegisterScreen extends StatelessWidget {
             if (state.registerModel.status == true) {
               print(state.registerModel.message);
               print(state.registerModel.data!.token);
-              // msgAlarm(
-              //   msg: state.getLogin.message,
-              //   textColor: Colors.black,
-              //   states: ToastStates.success,
-              // );
+              showToast(
+                  msg: state.registerModel.message!,
+                  state: ToastStates.success);
 
               CacheHelper.saveData(
                       key: 'token', value: state.registerModel.data?.token)
@@ -47,11 +45,9 @@ class RegisterScreen extends StatelessWidget {
               });
             } else {
               print(state.registerModel.message);
-              // msgAlarm(
-              //   msg: state.getLogin.message,
-              //   textColor: Colors.white,
-              //   states: ToastStates.error,
-              // );
+              showToast(
+                  msg: state.registerModel.message!,
+                  state: ToastStates.error);
             }
           }
         },
@@ -112,7 +108,7 @@ class RegisterScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    //login
+
                     defaultTextForm(
                         msg: 'please enter your e-mail',
                         type: TextInputType.emailAddress,

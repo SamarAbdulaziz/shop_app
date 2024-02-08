@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Widget defaultTextForm({
@@ -20,8 +19,9 @@ Widget defaultTextForm({
       keyboardType: type,
       validator: (String? value) {
         if (value!.isEmpty) {
-          return '${msg}';
+          return '$msg';
         }
+        return null;
       },
       decoration: InputDecoration(
         suffixIcon: InkWell(
@@ -33,8 +33,8 @@ Widget defaultTextForm({
           borderRadius: BorderRadius.circular(25.0),
           borderSide: const BorderSide(),
         ),
-        label: Text("${labelText}"),
+        label: Text("$labelText"),
         prefix: Icon(icon),
-        hintText: "${hintText}",
+        hintText: "$hintText",
       ),
     );

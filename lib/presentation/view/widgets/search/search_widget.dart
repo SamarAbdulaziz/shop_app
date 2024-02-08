@@ -31,7 +31,7 @@ class BuildListProductSearchItems extends StatelessWidget {
                 Stack(alignment: Alignment.bottomLeft, children: [
                   //
                   Image.network(
-                    "${model!.data!.data2[index].image}",
+                    model!.data!.data2[index].image,
                     width: 100,
                     height: 200,
                   ),
@@ -55,7 +55,7 @@ class BuildListProductSearchItems extends StatelessWidget {
                     children: [
                       //
                       Text(
-                        "${model!.data!.data2[index].name}",
+                        model!.data!.data2[index].name,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),
@@ -89,72 +89,4 @@ class BuildListProductSearchItems extends StatelessWidget {
   }
 }
 
-// Widget BuildListProductItem(SearchModel? model, index, context) =>
-//     BlocConsumer<SearchCubit, SearchStates>(
-//       listener: (BuildContext context, SearchStates state) {},
-//       builder: (BuildContext context, SearchStates state) {
-//         return Padding(
-//           padding: const EdgeInsets.all(20.0),
-//           child: Container(
-//             height: 120,
-//             child: Row(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Stack(alignment: Alignment.bottomLeft, children: [
-//                   //
-//                   Image.network(
-//                     "${model!.data!.data2[index].image}",
-//                     width: 100,
-//                     height: 200,
-//                   ),
-//                   // model.discount!=0
-//                   if (model.data!.data2[index].discount != 0)
-//                     Container(
-//                       padding: const EdgeInsets.symmetric(horizontal: 5),
-//                       color: Colors.red,
-//                       child: const Text(
-//                         'DISCOUNT',
-//                         style: TextStyle(color: Colors.white),
-//                       ),
-//                     ),
-//                 ]),
-//                 const SizedBox(
-//                   width: 10,
-//                 ),
-//                 Expanded(
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       //
-//                       Text(
-//                         "${model.data!.data2[index].name}",
-//                         overflow: TextOverflow.ellipsis,
-//                         maxLines: 2,
-//                       ),
-//                       const Spacer(),
-//                       Row(
-//                         children: [
-//                           //
-//                           Text(
-//                             '${model.data!.data2[index].price}',
-//                             style: const TextStyle(
-//                               color: defaultColor,
-//                             ),
-//                           ),
-//                           const SizedBox(
-//                             width: 10,
-//                           ),
-//                           //
-//
-//                           //
-//                         ],
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         );
-//       },
-//     );
+

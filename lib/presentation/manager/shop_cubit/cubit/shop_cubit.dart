@@ -36,7 +36,7 @@ class ShopCubit extends Cubit<ShopStates> {
   }
 
   HomeModel? homeModel;
-  Map<int?, bool?> fav = {};
+  Map<int?, bool?> favoriteProductsMap = {};
 
   void getHomeData() {
     emit(ShopLoadingHomeDataStates());
@@ -45,10 +45,10 @@ class ShopCubit extends Cubit<ShopStates> {
       // print(value.toString());
       homeModel = HomeModel.fromjson(value.data);
       //print(homeModel!.data.product[0].in_fav);
-      homeModel!.data.product.forEach((element) {
-        fav.addAll({element.id: element.in_fav});
-      });
-      print(fav.toString());
+      for (var element in homeModel!.data.product) {
+        favoriteProductsMap.addAll({element.id: element.in_fav});
+      }
+      print(favoriteProductsMap.toString());
       emit(ShopSuccessHomeDataStates());
     });
   }
@@ -69,7 +69,7 @@ class ShopCubit extends Cubit<ShopStates> {
   ChangeFavoritesModel? favModel;
 
   void changeFavIcon(int productId) {
-    fav[productId] = !fav[productId]!;
+    favoriteProductsMap[productId] = !favoriteProductsMap[productId]!;
     emit(ShopLoadingChangeFavDataStates());
     DioHelper.postData(
       url: Favorites,
@@ -80,18 +80,18 @@ class ShopCubit extends Cubit<ShopStates> {
       token: token,
     ).then((value) {
       favModel = ChangeFavoritesModel.fromJson(value.data);
-      getHomeData();
+      getHomeData();//v.imp
       // print(value.data);
       // print(favModel!.message);
       if (!favModel!.status) {
-        fav[productId] = !fav[productId]!;
+        favoriteProductsMap[productId] = !favoriteProductsMap[productId]!;
       } else {
         //if (fav[productId] == true)//if the product is changed in fav reload the data of the favorite products
         getHomeFavorite();
       }
       emit(ShopSuccessChangeFavDataStates(favModel!));
     }).catchError((e) {
-      fav[productId] = !fav[productId]!;
+      favoriteProductsMap[productId] = !favoriteProductsMap[productId]!;
       emit(ShopErrorChangeFavDataStates(e.toString()));
     });
   }

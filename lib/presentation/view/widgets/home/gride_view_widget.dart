@@ -108,7 +108,7 @@ class GridViewWidget extends StatelessWidget {
                         CircleAvatar(
                           backgroundColor:
                               //homeModel.data.product[index].in_fav
-                              cubit.fav[homeModel.data.product[index].id] ==
+                              cubit.favoriteProductsMap[homeModel.data.product[index].id] ==
                                       true
                                   ? Colors.red
                                   : defaultColor,
@@ -215,7 +215,7 @@ Widget gridViewWidgt(HomeModel? model, index) {
                       const Spacer(),
                       CircleAvatar(
                         backgroundColor:
-                            cubit.fav[model.data.product[index].id] == true
+                            cubit.favoriteProductsMap[model.data.product[index].id] == true
                                 ? Colors.red
                                 : defaultColor,
                         child: IconButton(

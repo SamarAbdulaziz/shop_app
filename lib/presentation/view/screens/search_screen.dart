@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../manager/search_cubit/search_cubit.dart';
 import '../../manager/search_cubit/states.dart';
-import '../widgets/custom_widget/custom_textformfield_widget.dart';
+import '../widgets/custom_widget/custom_text_form_field_widget.dart';
 import '../widgets/search/search_widget.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -30,7 +29,7 @@ class SearchScreen extends StatelessWidget {
                   defaultTextForm(
                     msg: 'please enter any words',
                     onSubmitted:(String? text){
-                      SearchCubit.get(context).Search(text);
+                      SearchCubit.get(context).search(text);
                     } ,
                     type: TextInputType.text,
                     controller: textSearchController,
@@ -46,7 +45,7 @@ class SearchScreen extends StatelessWidget {
                           physics:const BouncingScrollPhysics(),
                           itemBuilder: (context, index) =>
                               BuildListProductSearchItems(model:cubit.model ,index: index),
-                          separatorBuilder:  (context, index) => Container(height: 1,width: double.infinity,),
+                          separatorBuilder:  (context, index) => const SizedBox(height: 1,width: double.infinity,),
                           itemCount: cubit.model!.data!.data2.length),
                     ),
                 ],

@@ -36,6 +36,7 @@ abstract class DioHelper {
       if (e is DioException) {
         print('error');
         print(e.response?.data.toString());
+
         return e.response;
       }
     });

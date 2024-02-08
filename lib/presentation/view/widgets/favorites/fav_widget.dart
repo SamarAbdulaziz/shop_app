@@ -12,10 +12,10 @@ Widget BuildFavItem(FavoritesModel? model,index,context) => BlocConsumer<ShopCub
   listener: (BuildContext context, ShopStates state) {  },
   builder: (BuildContext context, ShopStates state) {
     int? id =model!.data!.data2[index].product!.id ;
-    ShopCubit getData = ShopCubit.get(context);
+    ShopCubit cubit = ShopCubit.get(context);
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Container(
+      child: SizedBox(
         height: 120,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,10 +78,10 @@ Widget BuildFavItem(FavoritesModel? model,index,context) => BlocConsumer<ShopCub
                       CircleAvatar(
                         radius: 15,
                         // ShopCubit.get(context).favoriets[ model.id]==true?Colors.red:Colors.grey,
-                        backgroundColor: getData.fav[model.data!.data2[index].product!.id] == true? Colors.red : defaultColor,
+                        backgroundColor: cubit.favoriteProductsMap[model.data!.data2[index].product!.id] == true? Colors.red : defaultColor,
                         child: IconButton(
                             onPressed: (){
-                              getData.changeFavIcon(id);
+                              cubit.changeFavIcon(id);
                             }, icon:const Icon(
                           Icons.favorite_border,
                           size:15,

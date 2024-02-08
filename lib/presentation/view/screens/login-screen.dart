@@ -83,6 +83,7 @@ class LoginScreen extends StatelessWidget {
                             if (value!.isEmpty) {
                               return 'please enter your email address';
                             }
+                            return null;
                           },
                           label: 'Email Address',
                           prefix: Icons.email_outlined,
@@ -112,6 +113,7 @@ class LoginScreen extends StatelessWidget {
                             if (value!.isEmpty) {
                               return 'password is too short';
                             }
+                            return null;
                           },
                           label: 'Password',
                           prefix: Icons.lock_outline,

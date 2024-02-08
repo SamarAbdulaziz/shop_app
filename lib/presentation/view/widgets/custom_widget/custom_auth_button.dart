@@ -7,5 +7,5 @@ Widget authButton ({ required BuildContext context,  authButtonText ,VoidCallbac
     color: defaultColor,
     child: TextButton(
       onPressed: onpressed,
-      child: Text("${authButtonText}",style: TextStyle(color: Colors.white),),
+      child: Text("$authButtonText",style: const TextStyle(color: Colors.white),),
     ));

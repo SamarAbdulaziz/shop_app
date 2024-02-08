@@ -10,7 +10,7 @@ final CategoriesModel catModel;
 final int index;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 100,
       width: 100,
       child: Stack(
@@ -30,7 +30,7 @@ final int index;
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
               ),
             ),
