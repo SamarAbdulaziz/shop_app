@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/core/constatnt.dart';
+import 'package:shop_app/core/constant.dart';
 import 'package:shop_app/core/themes/themes.dart';
 import 'package:shop_app/data/local_data_source/cache_helper.dart';
 import 'package:shop_app/data/remote_data_source/dio_helper.dart';

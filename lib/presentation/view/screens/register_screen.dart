@@ -2,7 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/components.dart';
-import 'package:shop_app/core/constatnt.dart';
+import 'package:shop_app/core/constant.dart';
 import 'package:shop_app/data/local_data_source/cache_helper.dart';
 import 'package:shop_app/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:shop_app/presentation/manager/register_cubit/states.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/components.dart';
-import 'package:shop_app/core/constatnt.dart';
+import 'package:shop_app/core/constant.dart';
 import 'package:shop_app/presentation/manager/login_cubit/shop_login_cubit.dart';
 import 'package:shop_app/presentation/manager/login_cubit/shop_login_state.dart';
 import 'package:shop_app/presentation/view/screens/register_screen.dart';

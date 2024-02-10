@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/core/constatnt.dart';
+import 'package:shop_app/core/constant.dart';
 import 'package:shop_app/data/endpoints.dart';
 import 'package:shop_app/data/models/auth/login_model.dart';
 import 'package:shop_app/data/models/categories/categories_model.dart';
@@ -73,7 +73,6 @@ class ShopCubit extends Cubit<ShopStates> {
     emit(ShopLoadingChangeFavDataStates());
     DioHelper.postData(
       url: Favorites,
-      lang: 'ar',
       data: {
         'product_id': productId,
       },
