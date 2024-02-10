@@ -26,20 +26,11 @@ abstract class DioHelper {
       'Authorization': token,
     };
 
-    return dio!
-        .post(
+    return dio!.post(
       url,
       queryParameters: query,
       data: data,
-    )
-        .catchError((e) {
-      if (e is DioException) {
-        print('error');
-        print(e.response?.data.toString());
-
-        return e.response;
-      }
-    });
+    );
   }
 
   static Future<Response> getData({
@@ -54,20 +45,10 @@ abstract class DioHelper {
       'Authorization': token,
     };
 
-    return await dio!
-        .get(
+    return await dio!.get(
       url,
       queryParameters: query,
-    )
-        .catchError((e) {
-      if (e is DioException) {
-        print('*********************error******************');
-        print(e.message.toString());
-        print(e.error.toString());
-        print(e.response.toString());
-        return e.response;
-      }
-    });
+    );
   }
 
   static Future<Response> putData({
@@ -83,14 +64,6 @@ abstract class DioHelper {
       'Authorization': token,
     };
 
-    return await dio!
-        .put(url, data: data, queryParameters: query)
-        .catchError((e) {
-      if (e is DioException) {
-        print('error');
-        print(e.response?.data.toString());
-        return e.response;
-      }
-    });
+    return await dio!.put(url, data: data, queryParameters: query);
   }
 }
