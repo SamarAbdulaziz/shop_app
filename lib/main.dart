@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/constant.dart';
 import 'package:shop_app/core/themes/themes.dart';
-import 'package:shop_app/data/local_data_source/cache_helper.dart';
-import 'package:shop_app/data/remote_data_source/dio_helper.dart';
 import 'package:shop_app/presentation/view/screens/home_screen.dart';
 import 'package:shop_app/presentation/view/screens/login-screen.dart';
 import 'package:shop_app/presentation/view/screens/onBoarding_screen.dart';
+import 'data/data_source/local_data_source/cache_helper.dart';
+import 'data/data_source/remote_data_source/api_service.dart';
+import 'data/data_source/remote_data_source/dio_helper.dart';
 import 'presentation/manager/login_cubit/my_bloc_observer.dart';
 import 'presentation/manager/shop_cubit/cubit/shop_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
+  ApiService.init();
   await CacheHelper.init();
   Bloc.observer = MyBlocObserver();
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
