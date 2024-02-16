@@ -4,10 +4,10 @@ class CategoriesModel
   late bool status;
   late CategoriesDataModel data;
 
-  CategoriesModel.fromjson(Map<String,dynamic> json)
+  CategoriesModel.fromJson(Map<String,dynamic> json)
   {
     status = json['status'];
-    data = CategoriesDataModel.fromjson(json['data']);
+    data = CategoriesDataModel.fromJson(json['data']);
 
 
   }
@@ -20,7 +20,7 @@ class CategoriesDataModel
   List<DataModel> data= [];
 
 
-  CategoriesDataModel.fromjson(Map<String,dynamic> json)
+  CategoriesDataModel.fromJson(Map<String,dynamic> json)
   {
     currentPage = json['current_page'];
     json['data'].forEach((element){

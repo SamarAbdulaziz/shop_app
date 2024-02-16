@@ -38,6 +38,7 @@ dependencies:
   fluttertoast: ^8.2.1
   conditional_builder_null_safety: ^0.0.6
   carousel_slider: ^4.2.1
+  dartz: ^0.10.1
 
 
 

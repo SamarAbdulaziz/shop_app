@@ -8,9 +8,8 @@ import 'package:shop_app/data/models/categories/categories_model.dart';
 import 'package:shop_app/data/models/favorites/change_favorites_model.dart';
 import 'package:shop_app/data/models/favorites/get_favorites_model.dart';
 import 'package:shop_app/data/models/home_model/home_model.dart';
-import 'package:shop_app/data/remote_data_source/dio_helper.dart';
 import 'package:shop_app/presentation/manager/shop_cubit/cubit/states.dart';
-
+import '../../../../data/data_source/remote_data_source/dio_helper.dart';
 import '../../../view/screens/cat_screen.dart';
 import '../../../view/screens/fav_screen.dart';
 import '../../../view/screens/product_screen.dart';
@@ -41,9 +40,12 @@ class ShopCubit extends Cubit<ShopStates> {
   void getHomeData() {
     emit(ShopLoadingHomeDataStates());
 
-    DioHelper.getData(url: HOME, token: token, query: {}).then((value) {
+    DioHelper.getData(
+      url: HOME,
+      token: token,
+    ).then((value) {
       // print(value.toString());
-      homeModel = HomeModel.fromjson(value.data);
+      homeModel = HomeModel.fromJson(value.data);
       //print(homeModel!.data.product[0].in_fav);
       for (var element in homeModel!.data.product) {
         favoriteProductsMap.addAll({element.id: element.in_fav});
@@ -59,7 +61,7 @@ class ShopCubit extends Cubit<ShopStates> {
     emit(ShopLoadingCategoriesDataStates());
 
     DioHelper.getData(url: GET_CATEGRIOES, query: {}).then((value) {
-      catModel = CategoriesModel.fromjson(value.data);
+      catModel = CategoriesModel.fromJson(value.data);
       print(catModel);
 
       emit(ShopSuccessCategoriesDataStates());
@@ -79,7 +81,7 @@ class ShopCubit extends Cubit<ShopStates> {
       token: token,
     ).then((value) {
       favModel = ChangeFavoritesModel.fromJson(value.data);
-      getHomeData();//v.imp
+      getHomeData(); //v.imp
       // print(value.data);
       // print(favModel!.message);
       if (!favModel!.status) {
@@ -143,7 +145,7 @@ class ShopCubit extends Cubit<ShopStates> {
             token: token)
         .then((value) {
       userModel = ShopLoginModel.fromJson(value.data);
-    emit(ShopSuccessUpdateUserDataStates(userModel!));
+      emit(ShopSuccessUpdateUserDataStates(userModel!));
     });
   }
 }

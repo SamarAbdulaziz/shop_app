@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/components.dart';
 import 'package:shop_app/core/constant.dart';
-import 'package:shop_app/data/local_data_source/cache_helper.dart';
 import 'package:shop_app/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:shop_app/presentation/manager/register_cubit/states.dart';
 import 'package:shop_app/presentation/view/screens/home_screen.dart';
 import 'package:shop_app/presentation/view/screens/login-screen.dart';
 import 'package:shop_app/presentation/view/widgets/custom_widget/custom_auth_button.dart';
 import 'package:shop_app/presentation/view/widgets/custom_widget/custom_text_form_field_widget.dart';
+import '../../../data/data_source/local_data_source/cache_helper.dart';
 
 class RegisterScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
@@ -46,8 +46,7 @@ class RegisterScreen extends StatelessWidget {
             } else {
               print(state.registerModel.message);
               showToast(
-                  msg: state.registerModel.message!,
-                  state: ToastStates.error);
+                  msg: state.registerModel.message!, state: ToastStates.error);
             }
           }
         },
@@ -124,7 +123,7 @@ class RegisterScreen extends StatelessWidget {
                     defaultTextForm(
                       onSubmitted: (value) {
                         if (formKey.currentState!.validate()) {
-                          cubit.getLogin(
+                          cubit.getRegister(
                             email: emailController.text,
                             password: passwdController.text,
                             phone: phoneController.text,
@@ -159,7 +158,7 @@ class RegisterScreen extends StatelessWidget {
                             authButtonText: "Sign-up",
                             onpressed: () {
                               if (formKey.currentState!.validate()) {
-                                cubit.getLogin(
+                                cubit.getRegister(
                                     name: nameController.text,
                                     phone: phoneController.text,
                                     email: emailController.text,

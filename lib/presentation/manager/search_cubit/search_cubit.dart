@@ -1,10 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/presentation/manager/search_cubit/states.dart';
-
 import '../../../core/constant.dart';
+import '../../../data/data_source/remote_data_source/dio_helper.dart';
 import '../../../data/endpoints.dart';
 import '../../../data/models/search/search_model.dart';
-import '../../../data/remote_data_source/dio_helper.dart';
 
 class SearchCubit extends Cubit<SearchStates> {
   SearchCubit() : super(SearchInitialState());

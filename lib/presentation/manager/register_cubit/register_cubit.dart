@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/data/endpoints.dart';
 import 'package:shop_app/data/models/auth/register_model.dart';
-import 'package:shop_app/data/remote_data_source/dio_helper.dart';
 import 'package:shop_app/presentation/manager/register_cubit/states.dart';
+import '../../../data/data_source/remote_data_source/dio_helper.dart';
 
 class ShopRegisterCubit extends Cubit<ShopAppRegisterStates> {
   ShopRegisterCubit() : super(InitialShopAppRegisterStates());
@@ -17,7 +17,7 @@ class ShopRegisterCubit extends Cubit<ShopAppRegisterStates> {
   bool password = true;
 
   //// Auth data TO API
-  void getLogin(
+  void getRegister(
       {required String? email,
       required String? password,
       required String? name,
