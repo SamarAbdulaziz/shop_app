@@ -35,7 +35,8 @@ class ShopRepoImpl implements BaseShopRepo {
         return Left(ServerFailure.fromDiorError(e));
       } else {
         debugPrint('**************=>   Exception  <=**************');
-        return Left(ServerFailure(e.toString()));
+        debugPrint(e.toString());
+        return Left(ServerFailure.fromMessage(e.toString()));
       }
     }
   }
@@ -66,7 +67,7 @@ class ShopRepoImpl implements BaseShopRepo {
         debugPrint('**************=>   Exception  <=**************');
 
         debugPrint(e.toString());
-        return Left(ServerFailure(e.toString()));
+        return Left(ServerFailure.fromMessage(e.toString()));
       }
     }
   }

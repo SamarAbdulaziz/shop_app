@@ -43,4 +43,15 @@ class ServerFailure extends Failure {
       return ServerFailure('There was an error , please try again');
     }
   }
+
+  factory ServerFailure.fromMessage(String message) {
+    switch (message) {
+      case 'Exception: This credentials does not meet any of our records, please make sure you have entered the right credentials':
+        return ServerFailure('your email or password is incorrect');
+        case 'Exception: Incorrect email format':
+        return ServerFailure('Incorrect email format');
+        default:
+        return ServerFailure(message);
+    }
+  }
 }
