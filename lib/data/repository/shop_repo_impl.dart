@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shop_app/core/errors/failure.dart';
 import 'package:shop_app/data/models/auth/register_model.dart';
 import 'package:shop_app/data/models/favorites/change_favorites_model.dart';
@@ -20,18 +21,22 @@ class ShopRepoImpl implements BaseShopRepo {
     required String email,
     required String password,
   }) async {
-    final result = await remoteDataSource.login(
-      email: email,
-      password: password,
-    );
-
     try {
+      final result = await remoteDataSource.login(
+        email: email,
+        password: password,
+      );
+      debugPrint('**************=>  on try  <=**************');
       return Right(result);
-    } catch (e) {
+    } on Exception catch (e) {
+      debugPrint('**************=>  on Server Exception  <=**************');
       if (e is DioException) {
+        debugPrint('**************=>  Dio Exception  <=**************');
         return Left(ServerFailure.fromDiorError(e));
+      } else {
+        debugPrint('**************=>   Exception  <=**************');
+        return Left(ServerFailure(e.toString()));
       }
-      return Left(ServerFailure(e.toString()));
     }
   }
 
@@ -50,11 +55,19 @@ class ShopRepoImpl implements BaseShopRepo {
 
     try {
       return Right(result);
-    } catch (e) {
+    } on Exception catch (e) {
+      debugPrint(e.toString());
       if (e is DioException) {
+        debugPrint('**************=>  DioException  <=**************');
+        debugPrint(e.type.toString());
+        debugPrint(e.message.toString());
         return Left(ServerFailure.fromDiorError(e));
+      } else {
+        debugPrint('**************=>   Exception  <=**************');
+
+        debugPrint(e.toString());
+        return Left(ServerFailure(e.toString()));
       }
-      return Left(ServerFailure(e.toString()));
     }
   }
 

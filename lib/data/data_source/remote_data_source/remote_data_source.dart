@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:shop_app/core/constant.dart';
 import 'package:shop_app/data/models/auth/login_model.dart';
 import 'package:shop_app/data/models/categories/categories_model.dart';
@@ -55,10 +56,12 @@ class RemoteDataSource implements BaseRemoteDataSource {
         'password': password,
       },
     );
+
     ShopLoginModel shopLoginModel = ShopLoginModel.fromJson(response.data);
     if (shopLoginModel.status == true) {
       return shopLoginModel;
     } else {
+      debugPrint('**************=>   remote data source error  <=**************');
       throw Exception(shopLoginModel.message);
     }
   }

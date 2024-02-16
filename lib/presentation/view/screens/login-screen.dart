@@ -23,15 +23,16 @@ class LoginScreen extends StatelessWidget {
     var passwordController = TextEditingController();
 
     return BlocProvider(
-      create: (BuildContext context) =>
-          ShopLoginCubit(loginUseCase: LoginUseCase(baseShopRepo: ShopRepoImpl(RemoteDataSource(ApiService())))),
+      create: (BuildContext context) => ShopLoginCubit(
+          loginUseCase: LoginUseCase(
+              baseShopRepo: ShopRepoImpl(RemoteDataSource(ApiService())))),
       child: BlocConsumer<ShopLoginCubit, ShopLoginStates>(
         listener: (context, state) {
           if (state is ShopLoginSuccessState) {
             if (state.loginModel.status == true) {
-              debugPrint(state.loginModel.status.toString());
-              debugPrint(state.loginModel.message);
-              debugPrint(state.loginModel.data!.token);
+              // debugPrint(state.loginModel.status.toString());
+              // debugPrint(state.loginModel.message);
+              // debugPrint(state.loginModel.data!.token);
               CacheHelper.saveData(
                 key: 'token',
                 value: state.loginModel.data!.token,
@@ -42,9 +43,16 @@ class LoginScreen extends StatelessWidget {
             } else {
               debugPrint(state.loginModel.message.toString());
               showToast(
-                  msg: state.loginModel.message.toString(),
-                  state: ToastStates.error);
+                msg: state.loginModel.message.toString(),
+                state: ToastStates.error,
+              );
             }
+          }
+          if (state is ShopLoginErrorState){
+            showToast(
+              msg: state.error,
+              state: ToastStates.error,
+            );
           }
         },
         builder: (context, state) {

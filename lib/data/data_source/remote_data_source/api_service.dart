@@ -8,7 +8,7 @@ class ApiService {
       BaseOptions(
         baseUrl: 'https://student.valuxapps.com/api/',
         receiveDataWhenStatusError: true,
-        //connectTimeout: Duration(seconds: 5),
+        //connectTimeout: const Duration(seconds: 5),
       ),
     );
   }
