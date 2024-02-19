@@ -53,15 +53,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 controller: boardController,
                 onPageChanged: (int index) {
                   if (index == boarding.length - 1) {
-                    // setState(() {
-                    //   isLast = true;
-                    // });
-                    debugPrint('last');
+                    setState(() {
+                      isLast = true;
+                      submit(context);
+                    });
+                    submit(context);
+                    debugPrint(' isLast = true');
                   } else {
-                    // setState(() {
-                    //   isLast = false;
-                    // });
-                    debugPrint('not last ');
+                    setState(() {
+                      isLast = false;
+                    });
+                    debugPrint(' isLast = false');
                   }
                 },
                 physics: const BouncingScrollPhysics(),
@@ -117,7 +119,6 @@ void submit(context) {
     );
   });
 }
-
 
 class OnBoardingModel {
   final String image;
