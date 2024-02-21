@@ -6,7 +6,7 @@ import '../repository/base_shop_repo.dart';
 class RegisterUseCase {
   final BaseShopRepo baseShopRepo;
 
-  RegisterUseCase({required this.baseShopRepo});
+  RegisterUseCase(this.baseShopRepo);
 
   Future<Either<Failure, RegisterModel>> call({
     required String email,

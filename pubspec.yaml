@@ -39,6 +39,7 @@ dependencies:
   conditional_builder_null_safety: ^0.0.6
   carousel_slider: ^4.2.1
   dartz: ^0.10.1
+  get_it:
 
 
 

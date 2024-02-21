@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shop_app/core/colors.dart';
+import 'package:shop_app/core/constant.dart';
 
 ThemeData lightTheme = ThemeData(
-  fontFamily: 'Agbalumo',
+  fontFamily: appFontFamily,
   primarySwatch: defaultColor,
   scaffoldBackgroundColor: Colors.white,
-  appBarTheme: const AppBarTheme(
+  appBarTheme: AppBarTheme(
     titleSpacing: 20.0,
-    systemOverlayStyle: SystemUiOverlayStyle(
+    systemOverlayStyle: const SystemUiOverlayStyle(
       statusBarColor: Colors.white,
       statusBarIconBrightness: Brightness.dark,
     ),
@@ -18,8 +19,9 @@ ThemeData lightTheme = ThemeData(
       color: Colors.black,
       fontSize: 20.0,
       fontWeight: FontWeight.bold,
+      fontFamily: appFontFamily,
     ),
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       color: Colors.black,
     ),
   ),

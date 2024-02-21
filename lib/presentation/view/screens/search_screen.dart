@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../core/service_locator/service_locator.dart';
 import '../../manager/search_cubit/search_cubit.dart';
 import '../../manager/search_cubit/states.dart';
 import '../widgets/custom_widget/custom_text_form_field_widget.dart';
@@ -8,18 +9,15 @@ import '../widgets/search/search_widget.dart';
 class SearchScreen extends StatelessWidget {
   const SearchScreen({Key? key}) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
-    var textSearchController=TextEditingController();
+    var textSearchController = TextEditingController();
     return BlocProvider(
-      create: (BuildContext context) =>SearchCubit(),
-      child: BlocConsumer<SearchCubit,SearchStates>(
-        listener: (context,state){},
-        builder: (context,state){
-          SearchCubit cubit = SearchCubit.get(context);
-
+      create: (BuildContext context) => sl<SearchCubit>(),
+      child: BlocConsumer<SearchCubit, SearchStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          // SearchCubit cubit = SearchCubit.get(context);
           return Scaffold(
             appBar: AppBar(),
             body: Padding(
@@ -28,25 +26,31 @@ class SearchScreen extends StatelessWidget {
                 children: [
                   defaultTextForm(
                     msg: 'please enter any words',
-                    onSubmitted:(String? text){
+                    onSubmitted: (String? text) {
                       SearchCubit.get(context).search(text);
-                    } ,
+                    },
                     type: TextInputType.text,
                     controller: textSearchController,
                     labelText: 'Search',
                     icon: Icons.search,
                   ),
-                  const SizedBox(height: 10,),
-                  if(state is SearchLoadingState)
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  if (state is SearchLoadingState)
                     const LinearProgressIndicator(),
-                  if(state is SearchSuccessesState)
+                  if (state is SearchSuccessesState)
                     Expanded(
                       child: ListView.separated(
-                          physics:const BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) =>
-                              BuildListProductSearchItems(model:cubit.model ,index: index),
-                          separatorBuilder:  (context, index) => const SizedBox(height: 1,width: double.infinity,),
-                          itemCount: cubit.model!.data!.data2.length),
+                              BuildListProductSearchItems(
+                                  model: state.searchModel, index: index),
+                          separatorBuilder: (context, index) => const SizedBox(
+                                height: 1,
+                                width: double.infinity,
+                              ),
+                          itemCount: state.searchModel.data!.data2.length),
                     ),
                 ],
               ),

@@ -6,6 +6,7 @@ import 'package:shop_app/data/models/auth/register_model.dart';
 import 'package:shop_app/data/models/favorites/change_favorites_model.dart';
 import 'package:shop_app/data/models/favorites/get_favorites_model.dart';
 import 'package:shop_app/data/models/home_model/home_model.dart';
+import 'package:shop_app/data/models/search/search_model.dart';
 import 'package:shop_app/domain/repository/base_shop_repo.dart';
 import '../data_source/remote_data_source/remote_data_source.dart';
 import '../models/auth/login_model.dart';
@@ -47,17 +48,15 @@ class ShopRepoImpl implements BaseShopRepo {
       required String? password,
       required String? name,
       required String? phone}) async {
-    final result = await remoteDataSource.register(
-      email: email,
-      password: password,
-      name: name,
-      phone: phone,
-    );
-
     try {
+      final result = await remoteDataSource.register(
+        email: email,
+        password: password,
+        name: name,
+        phone: phone,
+      );
       return Right(result);
     } on Exception catch (e) {
-      debugPrint(e.toString());
       if (e is DioException) {
         debugPrint('**************=>  DioException  <=**************');
         debugPrint(e.type.toString());
@@ -65,7 +64,6 @@ class ShopRepoImpl implements BaseShopRepo {
         return Left(ServerFailure.fromDiorError(e));
       } else {
         debugPrint('**************=>   Exception  <=**************');
-
         debugPrint(e.toString());
         return Left(ServerFailure.fromMessage(e.toString()));
       }
@@ -74,68 +72,96 @@ class ShopRepoImpl implements BaseShopRepo {
 
   @override
   Future<Either<Failure, CategoriesModel>> getCategories() async {
-    final result = await remoteDataSource.getCatData();
     try {
+      final result = await remoteDataSource.getCatData();
       return Right(result);
-    } catch (e) {
+    } on Exception catch (e) {
+      debugPrint('**************=>  on Server Exception  <=**************');
       if (e is DioException) {
-        return left(ServerFailure.fromDiorError(e));
+        debugPrint('**************=>  Dio Exception  <=**************');
+        return Left(ServerFailure.fromDiorError(e));
+      } else {
+        debugPrint('**************=>   Exception  <=**************');
+        debugPrint(e.toString());
+        return Left(ServerFailure.fromMessage(e.toString()));
       }
-      return left(ServerFailure(e.toString()));
     }
   }
 
   @override
   Future<Either<Failure, FavoritesModel>> getFavorites() async {
-    final result = await remoteDataSource.getHomeFavorite();
     try {
+      final result = await remoteDataSource.getHomeFavorite();
       return Right(result);
-    } catch (e) {
+    } on Exception catch (e) {
+      debugPrint('**************=>  on Server Exception  <=**************');
       if (e is DioException) {
-        return left(ServerFailure.fromDiorError(e));
+        debugPrint('**************=>  Dio Exception  <=**************');
+        return Left(ServerFailure.fromDiorError(e));
+      } else {
+        debugPrint('**************=>   Exception  <=**************');
+        debugPrint(e.toString());
+        return Left(ServerFailure.fromMessage(e.toString()));
       }
-      return left(ServerFailure(e.toString()));
     }
   }
 
   @override
   Future<Either<Failure, HomeModel>> getHomeData() async {
-    final result = await remoteDataSource.getHomeData();
     try {
+      final result = await remoteDataSource.getHomeData();
+
       return Right(result);
-    } catch (e) {
+    } on Exception catch (e) {
+      debugPrint('**************=>  on Server Exception  <=**************');
       if (e is DioException) {
-        return left(ServerFailure.fromDiorError(e));
+        debugPrint('**************=>  Dio Exception  <=**************');
+        return Left(ServerFailure.fromDiorError(e));
+      } else {
+        debugPrint('**************=>   Exception  <=**************');
+        debugPrint(e.toString());
+        return Left(ServerFailure.fromMessage(e.toString()));
       }
-      return left(ServerFailure(e.toString()));
     }
   }
 
   @override
   Future<Either<Failure, ShopLoginModel>> getProfile() async {
-    final result = await remoteDataSource.getUserData();
     try {
+      final result = await remoteDataSource.getUserData();
+
       return Right(result);
-    } catch (e) {
+    } on Exception catch (e) {
+      debugPrint('**************=>  on Server Exception  <=**************');
       if (e is DioException) {
+        debugPrint('**************=>  Dio Exception  <=**************');
         return Left(ServerFailure.fromDiorError(e));
+      } else {
+        debugPrint('**************=>   Exception  <=**************');
+        debugPrint(e.toString());
+        return Left(ServerFailure.fromMessage(e.toString()));
       }
-      return Left(ServerFailure(e.toString()));
     }
   }
 
   @override
   Future<Either<Failure, ChangeFavoritesModel>> changeFavorites(
       {required int productId}) async {
-    final result = await remoteDataSource.changeFavorites(productId: productId);
-
     try {
+      final result =
+          await remoteDataSource.changeFavorites(productId: productId);
+
       return Right(result);
-    } catch (e) {
+    } on Exception catch (e) {
+      debugPrint('**************=>  on Server Exception  <=**************');
       if (e is DioException) {
+        debugPrint('**************=>  Dio Exception  <=**************');
         return Left(ServerFailure.fromDiorError(e));
+      } else {
+        debugPrint('**************=>   Exception  <=**************');
+        debugPrint(e.toString());
+        return Left(ServerFailure.fromMessage(e.toString()));
       }
-      return Left(ServerFailure(e.toString()));
     }
   }
 
@@ -144,15 +170,38 @@ class ShopRepoImpl implements BaseShopRepo {
       {required String name,
       required String phone,
       required String email}) async {
-    final result = await remoteDataSource.updateUserData(
-        name: name, phone: phone, email: email);
     try {
+      final result = await remoteDataSource.updateUserData(
+          name: name, phone: phone, email: email);
       return Right(result);
-    } catch (e) {
+    } on Exception catch (e) {
+      debugPrint('**************=>  on Server Exception  <=**************');
       if (e is DioException) {
+        debugPrint('**************=>  Dio Exception  <=**************');
         return Left(ServerFailure.fromDiorError(e));
+      } else {
+        debugPrint('**************=>   Exception  <=**************');
+        debugPrint(e.toString());
+        return Left(ServerFailure.fromMessage(e.toString()));
       }
-      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, SearchModel>> search({required String? text}) async {
+    try {
+      final result = await remoteDataSource.search(text: text);
+      return Right(result);
+    } on Exception catch (e) {
+      debugPrint('**************=>  on Server Exception  <=**************');
+      if (e is DioException) {
+        debugPrint('**************=>  Dio Exception  <=**************');
+        return Left(ServerFailure.fromDiorError(e));
+      } else {
+        debugPrint('**************=>   Exception  <=**************');
+        debugPrint(e.toString());
+        return Left(ServerFailure.fromMessage(e.toString()));
+      }
     }
   }
 }

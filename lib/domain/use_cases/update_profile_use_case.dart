@@ -7,7 +7,7 @@ import '../repository/base_shop_repo.dart';
 class UpdateProfileUseCase {
   final BaseShopRepo baseShopRepo;
 
-  UpdateProfileUseCase({required this.baseShopRepo});
+  UpdateProfileUseCase(this.baseShopRepo);
 
   Future<Either<Failure, ShopLoginModel>> call({
     required String email,

@@ -7,6 +7,7 @@ import 'package:shop_app/data/models/favorites/get_favorites_model.dart';
 import 'package:shop_app/data/models/home_model/home_model.dart';
 import '../../endpoints.dart';
 import '../../models/auth/register_model.dart';
+import '../../models/search/search_model.dart';
 import 'api_service.dart';
 
 abstract class BaseRemoteDataSource {
@@ -37,6 +38,8 @@ abstract class BaseRemoteDataSource {
     required String phone,
     required String email,
   });
+
+  Future<SearchModel> search({required String? text});
 }
 
 class RemoteDataSource implements BaseRemoteDataSource {
@@ -55,13 +58,14 @@ class RemoteDataSource implements BaseRemoteDataSource {
         'email': email,
         'password': password,
       },
-    );
 
+    );
     ShopLoginModel shopLoginModel = ShopLoginModel.fromJson(response.data);
     if (shopLoginModel.status == true) {
       return shopLoginModel;
     } else {
-      debugPrint('**************=>   remote data source error  <=**************');
+      debugPrint(
+          '**************=>   remote data source error  <=**************');
       throw Exception(shopLoginModel.message);
     }
   }
@@ -101,14 +105,6 @@ class RemoteDataSource implements BaseRemoteDataSource {
     } else {
       throw Exception('homeModel error');
     }
-    // DioHelper.getData(url: HOME, token: token, query: {}).then((value) {
-    //   homeModel = HomeModel.fromJson(value.data);
-    //   //print(homeModel!.data.product[0].in_fav);
-    //   for (var element in homeModel!.data.product) {
-    //     favoriteProductsMap.addAll({element.id: element.in_fav});
-    //   }
-    //   print(favoriteProductsMap.toString());
-    // });
   }
 
   @override
@@ -122,13 +118,6 @@ class RemoteDataSource implements BaseRemoteDataSource {
     } else {
       throw Exception('categoriesModel error');
     }
-
-    // DioHelper.getData(url: GET_CATEGRIOES, query: {}).then((value) {
-    //   catModel = CategoriesModel.fromjson(value.data);
-    //   print(catModel);
-    //
-    //   emit(ShopSuccessCategoriesDataStates());
-    // });
   }
 
   @override
@@ -141,21 +130,14 @@ class RemoteDataSource implements BaseRemoteDataSource {
     } else {
       throw Exception(favoritesModel.message);
     }
-    // DioHelper.getData(
-    //   url: Favorites,
-    //   token: token,
-    // ).then((value) {
-    //   favoritesModel = FavoritesModel.fromJson(value.data);
-    //   print(favoritesModel!.data!.data2);
-    //
-    // });
   }
 
   @override
   Future<ChangeFavoritesModel> changeFavorites({required int productId}) async {
-    var response = await apiService.putData(url: Favorites, data: {
+    var response = await apiService.postData(url: Favorites, data: {
       'product_id': productId,
-    });
+    },token: token
+    );
     ChangeFavoritesModel changeFavoritesModel =
         ChangeFavoritesModel.fromJson(response.data);
     if (changeFavoritesModel.status == true) {
@@ -174,15 +156,6 @@ class RemoteDataSource implements BaseRemoteDataSource {
     } else {
       throw Exception(userModel.message);
     }
-    // DioHelper.getData(
-    //   url: PROFILE,
-    //   token: token,
-    // ).then((value) {
-    //   userModel = ShopLoginModel.fromJson(value.data);
-    //   print(userModel!.data!.name);
-    //
-    //   emit(ShopSuccessUserDataStates(userModel!));
-    // });
   }
 
   @override
@@ -201,12 +174,22 @@ class RemoteDataSource implements BaseRemoteDataSource {
     } else {
       throw Exception(userModel.message);
     }
-    // DioHelper.putData(
-    // data: {'name': name, 'phone': phone, 'email': email},
-    //     url: UPDATEPROFILE,
-    //     token: token)
-    //     .then((value) {
-    //   userModel = ShopLoginModel.fromJson(value.data);
-    // });
+  }
+
+  @override
+  Future<SearchModel> search({required String? text}) async {
+    var response = await apiService.postData(
+      url: SEARCH,
+      data: {
+        'text': text,
+      },
+      token: token,
+    );
+    SearchModel searchModel = SearchModel.fromJson(response.data);
+    if (searchModel.status == true) {
+      return searchModel;
+    } else {
+      throw Exception(searchModel.message);
+    }
   }
 }

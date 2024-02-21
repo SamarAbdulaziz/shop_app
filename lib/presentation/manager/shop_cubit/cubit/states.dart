@@ -1,5 +1,9 @@
 import 'package:shop_app/data/models/auth/login_model.dart';
 import 'package:shop_app/data/models/favorites/change_favorites_model.dart';
+import 'package:shop_app/data/models/favorites/get_favorites_model.dart';
+import 'package:shop_app/data/models/home_model/home_model.dart';
+
+import '../../../../data/models/categories/categories_model.dart';
 
 abstract class ShopStates {}
 
@@ -9,17 +13,26 @@ class BottomNavigationBarState extends ShopStates {}
 
 class ShopLoadingHomeDataStates extends ShopStates {}
 
-class ShopSuccessHomeDataStates extends ShopStates {}
+class ShopSuccessHomeDataStates extends ShopStates {
+  final HomeModel homeModel;
+
+  ShopSuccessHomeDataStates(this.homeModel);
+}
 
 class ShopErrorHomeDataStates extends ShopStates {
   final String error;
 
   ShopErrorHomeDataStates(this.error);
 }
+//==================================================================
 
 class ShopLoadingCategoriesDataStates extends ShopStates {}
 
-class ShopSuccessCategoriesDataStates extends ShopStates {}
+class ShopSuccessCategoriesDataStates extends ShopStates {
+  final CategoriesModel categoriesModel;
+
+  ShopSuccessCategoriesDataStates({required this.categoriesModel});
+}
 
 class ShopErrorCategoriesDataStates extends ShopStates {
   final String error;
@@ -27,16 +40,23 @@ class ShopErrorCategoriesDataStates extends ShopStates {
   ShopErrorCategoriesDataStates(this.error);
 }
 
+//==================================================================
+
 class ShopLoadingFavDataStates extends ShopStates {}
 
-class ShopSuccessFavDataStates extends ShopStates {}
+class ShopSuccessFavDataStates extends ShopStates {
+  final FavoritesModel favoritesModel;
 
-class ShopErrorFavDataStates extends ShopStates {
-  final String error;
-
-  ShopErrorFavDataStates(this.error);
+  ShopSuccessFavDataStates({required this.favoritesModel});
 }
 
+class ShopErrorFavDataStates extends ShopStates {
+  final String message;
+
+  ShopErrorFavDataStates({required this.message});
+}
+
+//==================================================================
 class ShopLoadingChangeFavDataStates extends ShopStates {}
 
 class ShopSuccessChangeFavDataStates extends ShopStates {
@@ -46,11 +66,12 @@ class ShopSuccessChangeFavDataStates extends ShopStates {
 }
 
 class ShopErrorChangeFavDataStates extends ShopStates {
-  final String error;
+  final String message;
 
-  ShopErrorChangeFavDataStates(this.error);
+  ShopErrorChangeFavDataStates({required this.message});
 }
 
+//==================================================================
 class ShopLoadingUserDataStates extends ShopStates {}
 
 class ShopSuccessUserDataStates extends ShopStates {
@@ -60,11 +81,12 @@ class ShopSuccessUserDataStates extends ShopStates {
 }
 
 class ShopErrorUserDataStates extends ShopStates {
-  final String error;
+  final String message;
 
-  ShopErrorUserDataStates(this.error);
+  ShopErrorUserDataStates({required this.message});
 }
 
+//==================================================================
 class ShopUpdateUserDataLoadingStates extends ShopStates {}
 
 class ShopSuccessUpdateUserDataStates extends ShopStates {
@@ -74,7 +96,7 @@ class ShopSuccessUpdateUserDataStates extends ShopStates {
 }
 
 class ShopErrorUpdateUserDataStates extends ShopStates {
-  final String error;
+  final String message;
 
-  ShopErrorUpdateUserDataStates(this.error);
+  ShopErrorUpdateUserDataStates({required this.message});
 }

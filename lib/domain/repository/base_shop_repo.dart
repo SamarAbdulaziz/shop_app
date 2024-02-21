@@ -4,6 +4,7 @@ import 'package:shop_app/data/models/auth/register_model.dart';
 import 'package:shop_app/data/models/categories/categories_model.dart';
 import 'package:shop_app/data/models/favorites/get_favorites_model.dart';
 import 'package:shop_app/data/models/home_model/home_model.dart';
+import 'package:shop_app/data/models/search/search_model.dart';
 import '../../data/models/auth/login_model.dart';
 import '../../data/models/favorites/change_favorites_model.dart';
 
@@ -33,4 +34,7 @@ abstract class BaseShopRepo {
 
   Future<Either<Failure, ShopLoginModel>> updateProfile(
       {required String name, required String phone, required String email});
+
+  Future<Either<Failure, SearchModel>> search({required String? text});
+
 }

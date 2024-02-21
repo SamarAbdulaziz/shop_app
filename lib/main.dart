@@ -5,6 +5,7 @@ import 'package:shop_app/core/themes/themes.dart';
 import 'package:shop_app/presentation/view/screens/home_screen.dart';
 import 'package:shop_app/presentation/view/screens/login-screen.dart';
 import 'package:shop_app/presentation/view/screens/onBoarding_screen.dart';
+import 'core/service_locator/service_locator.dart';
 import 'data/data_source/local_data_source/cache_helper.dart';
 import 'data/data_source/remote_data_source/api_service.dart';
 import 'data/data_source/remote_data_source/dio_helper.dart';
@@ -15,6 +16,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   ApiService.init();
+  ServiceLocator().init();
+
   await CacheHelper.init();
   Bloc.observer = MyBlocObserver();
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
@@ -49,11 +52,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ShopCubit()
-        ..getHomeData()
-        ..getCatData()
-        ..getHomeFavorite()
-        ..getUserData(),
+      create: (context) => sl<ShopCubit>(),
+      //..getHomeData(),
+      //..getCatData()
+      //..getHomeFavorite()
+      //..getUserData(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.light,

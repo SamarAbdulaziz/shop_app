@@ -9,29 +9,23 @@ import 'package:shop_app/presentation/view/screens/home_screen.dart';
 import 'package:shop_app/presentation/view/screens/login-screen.dart';
 import 'package:shop_app/presentation/view/widgets/custom_widget/custom_auth_button.dart';
 import 'package:shop_app/presentation/view/widgets/custom_widget/custom_text_form_field_widget.dart';
+import '../../../core/service_locator/service_locator.dart';
 import '../../../data/data_source/local_data_source/cache_helper.dart';
 
 class RegisterScreen extends StatelessWidget {
-  var formKey = GlobalKey<FormState>();
-
-  RegisterScreen({super.key});
-
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwdController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return BlocProvider(
-      create: (BuildContext context) => ShopRegisterCubit(),
+      create: (BuildContext context) => sl<ShopRegisterCubit>(),
       child: BlocConsumer<ShopRegisterCubit, ShopAppRegisterStates>(
         listener: (context, state) {
           if (state is ShopAppSuccessRegisterStates) {
             if (state.registerModel.status == true) {
-              print(state.registerModel.message);
-              print(state.registerModel.data!.token);
+              debugPrint(state.registerModel.message);
+              debugPrint(state.registerModel.data!.token);
               showToast(
                   msg: state.registerModel.message!,
                   state: ToastStates.success);
@@ -40,11 +34,11 @@ class RegisterScreen extends StatelessWidget {
                       key: 'token', value: state.registerModel.data?.token)
                   .then((value) {
                 token = state.registerModel.data?.token;
-                print("token saved");
+                debugPrint("token saved");
                 navigateAndFinish(context, const HomeScreen());
               });
             } else {
-              print(state.registerModel.message);
+              debugPrint(state.registerModel.message);
               showToast(
                   msg: state.registerModel.message!, state: ToastStates.error);
             }
@@ -62,7 +56,7 @@ class RegisterScreen extends StatelessWidget {
                     child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Form(
-                key: formKey,
+                key: cubit.formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -74,7 +68,7 @@ class RegisterScreen extends StatelessWidget {
                           .headlineMedium
                           ?.copyWith(color: Colors.black),
                     ),
-                    //DEscription of screen
+                    //Description of screen
                     Text(
                       "Sign-up to browse our hot offers",
                       style: Theme.of(context)
@@ -91,7 +85,7 @@ class RegisterScreen extends StatelessWidget {
                         type: TextInputType.name,
                         labelText: "Name",
                         hintText: "Test",
-                        controller: nameController,
+                        controller: cubit.nameController,
                         icon: Icons.person),
                     const SizedBox(
                       height: 15,
@@ -102,7 +96,7 @@ class RegisterScreen extends StatelessWidget {
                         type: TextInputType.phone,
                         labelText: "phone",
                         hintText: "01xxxxxxxxx",
-                        controller: phoneController,
+                        controller: cubit.phoneController,
                         icon: Icons.phone),
                     const SizedBox(
                       height: 15,
@@ -113,7 +107,7 @@ class RegisterScreen extends StatelessWidget {
                         type: TextInputType.emailAddress,
                         labelText: "Email",
                         hintText: "text@email.com",
-                        controller: emailController,
+                        controller: cubit.emailController,
                         icon: Icons.email_outlined),
 
                     const SizedBox(
@@ -122,22 +116,22 @@ class RegisterScreen extends StatelessWidget {
                     //password
                     defaultTextForm(
                       onSubmitted: (value) {
-                        if (formKey.currentState!.validate()) {
+                        if (cubit.formKey.currentState!.validate()) {
                           cubit.getRegister(
-                            email: emailController.text,
-                            password: passwdController.text,
-                            phone: phoneController.text,
-                            name: nameController.text,
+                            email: cubit.emailController.text,
+                            password: cubit.passwdController.text,
+                            phone: cubit.phoneController.text,
+                            name: cubit.nameController.text,
                           );
-                          print(emailController.text);
-                          print(passwdController.text);
+                          debugPrint(cubit.emailController.text);
+                          debugPrint(cubit.passwdController.text);
                         }
                       },
                       msg: 'please enter your password',
                       type: TextInputType.visiblePassword,
                       labelText: "password",
                       hintText: "******",
-                      controller: passwdController,
+                      controller: cubit.passwdController,
                       icon: Icons.lock_outline,
                       passwd: cubit.password,
                       onTap: () {
@@ -157,14 +151,14 @@ class RegisterScreen extends StatelessWidget {
                             context: context,
                             authButtonText: "Sign-up",
                             onpressed: () {
-                              if (formKey.currentState!.validate()) {
+                              if (cubit.formKey.currentState!.validate()) {
                                 cubit.getRegister(
-                                    name: nameController.text,
-                                    phone: phoneController.text,
-                                    email: emailController.text,
-                                    password: passwdController.text);
-                                print(emailController.text);
-                                print(passwdController.text);
+                                    name: cubit.nameController.text,
+                                    phone: cubit.phoneController.text,
+                                    email: cubit.emailController.text,
+                                    password: cubit.passwdController.text);
+                                debugPrint(cubit.emailController.text);
+                                debugPrint(cubit.passwdController.text);
                               }
                               // Navigator.pop(context);
                             });

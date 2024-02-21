@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/core/components.dart';
 import 'package:shop_app/core/constant.dart';
-import 'package:shop_app/data/data_source/remote_data_source/api_service.dart';
-import 'package:shop_app/data/repository/shop_repo_impl.dart';
 import 'package:shop_app/presentation/manager/login_cubit/shop_login_cubit.dart';
 import 'package:shop_app/presentation/manager/login_cubit/shop_login_state.dart';
 import 'package:shop_app/presentation/view/screens/register_screen.dart';
+import '../../../core/service_locator/service_locator.dart';
 import '../../../data/data_source/local_data_source/cache_helper.dart';
-import '../../../data/data_source/remote_data_source/remote_data_source.dart';
-import '../../../domain/use_cases/login_use_case.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -23,9 +20,7 @@ class LoginScreen extends StatelessWidget {
     var passwordController = TextEditingController();
 
     return BlocProvider(
-      create: (BuildContext context) => ShopLoginCubit(
-          loginUseCase: LoginUseCase(
-              baseShopRepo: ShopRepoImpl(RemoteDataSource(ApiService())))),
+      create: (BuildContext context) => sl<ShopLoginCubit>(),
       child: BlocConsumer<ShopLoginCubit, ShopLoginStates>(
         listener: (context, state) {
           if (state is ShopLoginSuccessState) {
@@ -48,7 +43,7 @@ class LoginScreen extends StatelessWidget {
               );
             }
           }
-          if (state is ShopLoginErrorState){
+          if (state is ShopLoginErrorState) {
             showToast(
               msg: state.error,
               state: ToastStates.error,

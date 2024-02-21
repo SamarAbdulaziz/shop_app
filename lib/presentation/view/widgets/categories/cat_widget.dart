@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../data/models/categories/categories_model.dart';
 
-class GridViewWidget extends StatelessWidget {
-  const GridViewWidget({super.key, required this.catModel, required this.index});
+class CategoriesGridViewWidget extends StatelessWidget {
+  const CategoriesGridViewWidget({super.key, required this.catModel, required this.index});
 
   final CategoriesModel catModel;
   final int index;

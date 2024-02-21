@@ -6,6 +6,6 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileWidget();
+    return  ProfileWidget();
   }
 }
